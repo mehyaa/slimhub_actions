@@ -22,11 +22,10 @@ cat <<EOBT
 
   ╔══════════════════════════════════════════════════════════════╗
   ║                                                              ║
-  ║             The Project Script Changed Recently,             ║
-  ║               There Are Many Breaking Changes.               ║
-  ║       ------------------------------------------------       ║
-  ║           Please Read The README.md File Properly.           ║
-  ║       ------------------------------------------------       ║
+  ║                Github Workflow Cleaner Action                ║
+  ║      --------------------------------------------------      ║
+  ║        Please Go Through The README.md File Properly.        ║
+  ║     ----------------------------------------------------     ║
   ║                 Visit Here & Read Carefully:                 ║
   ║  https://github.com/rokibhasansagar/slimhub_actions/#readme  ║
   ║                                                              ║
@@ -109,7 +108,7 @@ df --sync -BM --output=pcent,used,avail /
 echo "::endgroup::"
 
 echo "::group:: {[+]}  Temporary Apt Cache Update"
-sudo apt-fast update -qy
+sudo apt-get update -qy
 echo "::endgroup::"
 
 if [[ ${retain_homebrew} != "true" ]]; then
@@ -174,7 +173,7 @@ EOX
 fi
 if [[ ${retain_browser_chrome} != "true" ]]; then
   export AptPurgeList+=" google-chrome-stable"
-  export DirPurgeList+=" /usr/bin/google-chrome /usr/local/share/chrome_driver /usr/bin/chromedriver /usr/local/share/chromium /usr/bin/chromium /usr/bin/chromium-browser"
+  export DirPurgeList+=" /usr/bin/google-chrome /usr/local/share/chromedriver* /usr/bin/chromedriver /usr/local/share/chromium /usr/bin/chromium /usr/bin/chromium-browser"
 fi
 if [[ ${retain_browser_edge} != "true" ]]; then
   export AptPurgeList+=" microsoft-edge-stable"
@@ -278,7 +277,7 @@ fi
 if [[ ${retain_compiler_gcc} != "true" ]]; then
   case "$(lsb_release -rs)" in
   "22.04") export AptPurgeList+=" g++-9 g++-10 g++-12 gcc-9 gcc-10 gcc-12" ;;
-  "20.04") export AptPurgeList+=" g++-10 g++-12 gcc-10 gcc-12" ;;
+  "24.04") export AptPurgeList+=" g++-12 g++-14 gcc-12 gcc-14" ;;
   esac
 fi
 if [[ ${retain_compiler_gfortran} != "true" ]]; then
@@ -346,9 +345,6 @@ if [[ ${retain_libgtk} != "true" ]]; then
 fi
 
 # TODO: Add Additional apt Packages to be Removed
-if [[ "$(lsb_release -rs)" == "20.04" ]]; then
-  export AptPurgeList+=" esl-erlang" DirPurgeList+=" /usr/local/bin/rebar3"
-fi
 export AptPurgeList+=" imagemagick imagemagick-6-common libgl1-mesa-dri firebird* hhvm "
 export DirPurgeList+=" /usr/share/firebird* /opt/hhvm /usr/share/sbt /usr/bin/sbt /usr/local/share/phantomjs* /usr/local/bin/phantomjs /usr/local/bin/packer /usr/local/lib/lein /usr/local/bin/lein /usr/local/bin/pulumi /usr/local/bin/pulumi-* /usr/share/miniconda /usr/bin/conda"
 

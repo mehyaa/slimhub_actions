@@ -42,5 +42,5 @@ echo "::endgroup::"
 echo "::group:: Log Download Area"
 tar -I'zstd --ultra -22 -T2' -cf ${state}.${wf_os}.lists.tzst *.${state}.${wf_os}.list
 rm *.${state}.${wf_os}.list
-curl -s --upload-file ${state}.${wf_os}.lists.tzst https://transfer.sh/ && echo
+curl -s -F "file=@${state}.${wf_os}.lists.tzst" https://temp.sh/upload && echo
 echo "::endgroup::"

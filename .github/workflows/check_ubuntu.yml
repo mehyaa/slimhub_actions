@@ -5,7 +5,10 @@ on:
     branches: [ main ]
     paths:
     - 'cleanup.sh'
+    - '.github/workflows/check_ubuntu.yml'
   push:
+    tags:
+      - v*
     branches: [ main ]
     paths:
     - 'cleanup.sh'
@@ -14,6 +17,10 @@ on:
     - cron: '1 1 1,15 * *'
   workflow_dispatch:
 
+concurrency:
+  group: ci-test-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   cleanup:
     if: github.repository == 'rokibhasansagar/slimhub_actions'
@@ -21,10 +28,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04, ubuntu-22.04, ubuntu-24.04]
+        os: [ubuntu-22.04, ubuntu-24.04]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: 'main'
       - name: Raw Environment Checkup

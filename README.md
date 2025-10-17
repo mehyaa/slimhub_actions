@@ -5,8 +5,8 @@
 
 <div align="center">
   <img src="https://img.shields.io/github/v/release/rokibhasansagar/slimhub_actions?label=Release%20Version&cacheSeconds=300" alt="Release Version" />
-  <!-- export ReleaseVersion=v$(date +%g.%V.%u) # v23.13.4 (YY.WeekNum.DayOfWeek) -->
-  <img src="https://img.shields.io/github/last-commit/rokibhasansagar/slimhub_actions?label=Last%20Updated&cacheSeconds=120" alt="GitHub last commit" />
+  <!-- export ReleaseVersion=v$(date +%g.%V.%u) #(YY.WeekNum.DayOfWeek) -->
+  <img src="https://img.shields.io/github/release-date/rokibhasansagar/slimhub_actions?label=Last%20Release%20Date&cacheSeconds=600" src="https://img.shields.io/github/last-commit/rokibhasansagar/slimhub_actions?label=Last%20Updated&cacheSeconds=120" alt="Last GitHub Release Date" />
   <img src="https://img.shields.io/badge/Status-Stable-brightgreen.svg" alt="Status" />
   <img src="https://img.shields.io/github/actions/workflow/status/rokibhasansagar/slimhub_actions/check_ubuntu.yml?label=Checks&cacheSeconds=120" alt="GitHub Workflow Status" />
   <img src="https://img.shields.io/github/license/rokibhasansagar/slimhub_actions?label=Project%20License&color=blueviolet" alt="License" />
@@ -27,7 +27,7 @@
 
 <h2>How To Use The Project</h2>
 
-Your Workflow must run on Ubuntu Runners, `ubuntu-20.04` (focal) and `ubuntu-22.04`/`ubuntu-latest` (jammy) are supported for now, `ubuntu-18.04` (bionic) is not available any more.
+Your Workflow must run on Ubuntu Runners, `ubuntu-24.04` (noble) and `ubuntu-22.04` (jammy) are supported for now, `ubuntu-20.04` (focal) is not available any more.
 
 If you need some of the programs to be kept back, you can use `retain` input key with the actions step. You can put multiple values separated by comma/space. See below section to know the values for retention of your specific programs.
 
@@ -36,10 +36,10 @@ If you need some of the programs to be kept back, you can use `retain` input key
 jobs:
   slim_build:
     runs-on: ubuntu-latest
-    # You can use either of the ubuntu-20.04 or ubuntu-22.04 runner
+    # You can use either of the ubuntu-24.04 or ubuntu-22.04 runner
     steps:
       # You might want to Checkout your repo first, but not mandatory
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
       # Cleanup The Actions Workspace Using Custom Composite Run Actions
       - uses: rokibhasansagar/slimhub_actions@main
         # Optional key, "retain": Use only if you want something to keep
@@ -57,8 +57,7 @@ jobs:
 
 The following list shows which program groups can be kept back. Some of the group has sub-groups in them, so if any base group is removed, all sub-groups will be removed.
 
-<details>
-  <summary><h3><b><i>List of Program Groups and Sub-groups</i></b></h3></summary>
+<h3><b><i>List of Program Groups and Sub-groups</i></b></h3>
 
 ```
 - homebrew
@@ -112,7 +111,6 @@ The following list shows which program groups can be kept back. Some of the grou
 - manpages
 - libgtk
 ```
-</details>
 
 <h2>Example Usage</h2>
 
@@ -250,6 +248,6 @@ See the [script](cleanup.sh) itself to know exactly how the script works.
 
 <h2>License</h2>
 
-<b>Copyright (c) 2021-2023 Rokib Hasan Sagar</b>
+<b>Copyright (c) 2021-2025 Rokib Hasan Sagar</b>
 
 The script and documentation in this project are released under the [MIT License](LICENSE)
